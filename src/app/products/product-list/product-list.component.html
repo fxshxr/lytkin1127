@@ -1,0 +1,66 @@
+<div class="container">
+<br>
+
+
+  <div class="row my-3">
+    <div class="col-2">
+      <h2>Сортировка</h2></div>
+    <div class="col-4">
+      <select class="form-control" [(ngModel)]="column">
+        <option value="byprice" >по возрастанию цены</option>
+        <option value="byquantity">по возрастанию кол-ва на складе</option>
+        <option value="bypricer" >по убыванию цены</option>
+        <option value="byquantityr">по убыванию  кол-ва на складе</option>
+
+      </select>
+    </div>
+   
+  </div>
+  <div class="row mt-5 mb-2">
+    <div class="col-12">
+      <h3>Каталог товаров</h3>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+
+        <th scope="col">Название</th>
+        <th scope="col">Категория</th>
+        <th scope="col">Вес</th>
+				<th scope="col">Цена</th>
+				<th scope="col">Кол-во на складе</th>
+        <th scope="col"></th>
+        <th class="text-right" scope="col">
+          <button class="btn btn-primary" (click)="onAddProduct()">
+            Добавить товар
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | sort:column:reverse">
+				<td >{{ product.name }}</td>
+				<td>{{ product.category | category }}</td>
+        <td>{{ product.weight }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+          
+          {{ product.quantity }}
+          
+        </td>
+          
+
+        <td class="text-right">
+          <button class=" btn btn-dark" (click)="onLinkProduct(product.id)">
+            Редактировать
+          </button>
+        </td>
+        <td class="text-right">
+          <button class="btn btn-outline-danger modal-exit mr-2" (click)="onDelete(product.id)">
+            Удалить
+          </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
